@@ -1,4 +1,4 @@
-﻿/*
+/*
  * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  *
  *
@@ -208,7 +208,7 @@ import java.util.*;
  * the Executor uses finite bounds for both maximum threads and work queue
  * capacity, and is saturated.  In either case, the {@code execute} method
  * invokes the {@link
- * RejectedExecutionHandler#rejectedExecution(Runnable, ThreadPoolExecutor)}
+ * //RejectedExecutionHandler#rejectedExecution(Runnable, ThreadPoolExecutor)}
  * method of its {@link RejectedExecutionHandler}.  Four predefined handler
  * policies are provided:
  *
@@ -963,7 +963,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
      * Package-protected for use by ScheduledThreadPoolExecutor.
      */
     final void reject(Runnable command) {
-        handler.rejectedExecution(command, this);
+        //handler.rejectedExecution(command, this);
     }
 
     /**
@@ -2475,6 +2475,11 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                 r.run();
             }
         }
+
+        @Override
+        public void rejectedExecution(Runnable r, java.util.concurrent.ThreadPoolExecutor executor) {
+
+        }
     }
 
     /**
@@ -2499,6 +2504,11 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                     " rejected from " +
                     e.toString());
         }
+
+        @Override
+        public void rejectedExecution(Runnable r, java.util.concurrent.ThreadPoolExecutor executor) {
+
+        }
     }
 
     /**
@@ -2518,6 +2528,11 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
          * @param e the executor attempting to execute this task
          */
         public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+        }
+
+        @Override
+        public void rejectedExecution(Runnable r, java.util.concurrent.ThreadPoolExecutor executor) {
+
         }
     }
 
@@ -2546,6 +2561,11 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
                 e.getQueue().poll();
                 e.execute(r);
             }
+        }
+
+        @Override
+        public void rejectedExecution(Runnable r, java.util.concurrent.ThreadPoolExecutor executor) {
+
         }
     }
 }

@@ -35,7 +35,6 @@
 
 package com.myl.source.juc;
 
-import com.myl.source.juc.base.Thread;
 import com.myl.source.juc.base.ThreadLocal;
 
 import java.io.ObjectStreamField;
@@ -208,7 +207,7 @@ public class ThreadLocalRandom extends Random {
      * though the initialization is purely thread-local, we need to
      * rely on (static) atomic generators to initialize the values.
      */
-    static final void localInit() {
+    public static final void localInit() {
         int p = probeGenerator.addAndGet(PROBE_INCREMENT);
         int probe = (p == 0) ? 1 : p; // skip 0
         long seed = mix64(seeder.getAndAdd(SEEDER_INCREMENT));
@@ -981,7 +980,7 @@ public class ThreadLocalRandom extends Random {
      * initialization. Note that invoking ThreadLocalRandom.current()
      * can be used to force initialization on zero return.
      */
-    static final int getProbe() {
+    public static final int getProbe() {
         return UNSAFE.getInt(Thread.currentThread(), PROBE);
     }
 
@@ -989,7 +988,7 @@ public class ThreadLocalRandom extends Random {
      * Pseudo-randomly advances and records the given probe value for the
      * given thread.
      */
-    static final int advanceProbe(int probe) {
+    public static final int advanceProbe(int probe) {
         probe ^= probe << 13;   // xorshift
         probe ^= probe >>> 17;
         probe ^= probe << 5;

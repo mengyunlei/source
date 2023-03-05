@@ -34,7 +34,6 @@
  */
 
 package com.myl.source.juc.base;
-
 import java.util.concurrent.TimeUnit;
 import java.util.Collection;
 import java.util.concurrent.locks.*;
@@ -314,7 +313,7 @@ public class ReentrantReadWriteLock
          * of deserialization mechanics.
          */
         static final class ThreadLocalHoldCounter
-            extends ThreadLocal<HoldCounter> {
+            extends java.lang.ThreadLocal<HoldCounter> {
             public HoldCounter initialValue() {
                 return new HoldCounter();
             }
@@ -862,7 +861,8 @@ public class ReentrantReadWriteLock
              * block if there is a waiting writer behind other enabled
              * readers that have not yet drained from the queue.
              */
-            return apparentlyFirstQueuedIsExclusive();
+            //return apparentlyFirstQueuedIsExclusive();
+            return false;
         }
     }
 
